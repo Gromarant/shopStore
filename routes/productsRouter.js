@@ -42,10 +42,29 @@ router.post('/', (req, res) => {
   res.json(
     {
       message: 'created product with id: ' + body.id,
-      data: body
+      data: body,
     }
   )
-})
+});
+
+router.patch('/:productId', (req, res) => {
+  const { productId } = req.params;
+
+  res.json({
+    message: 'Product with id:' + productId + ' updated',
+    data: req.body,
+    id: productId,
+  })
+});
+
+router.delete('/:productId', (req,res) => {
+  const productId = req.params;
+
+  res.json({
+    message: 'Product deleted',
+    id: productId,
+  })
+});
 
 
 module.exports = router;
