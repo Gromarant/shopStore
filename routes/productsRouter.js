@@ -9,8 +9,11 @@ router.get('/', (req, res) => {
   const limit = size || 10;
 
   for(let index = 0; index < limit; index++) {
+    const productId = Math.floor(Math.random() * 10001);
+
     products.push(
       {
+        id: productId,
         name: faker.commerce.productName(),
         price: parseInt(faker.commerce.price(), 10),
         image: faker.image.imageUrl(),
@@ -32,5 +35,17 @@ router.get('/:productId', (req, res) => {
     }
   )
 });
+
+router.post('/', (req, res) => {
+  const body = req.body;
+
+  res.json(
+    {
+      message: 'created product with id: ' + body.id,
+      data: body
+    }
+  )
+})
+
 
 module.exports = router;

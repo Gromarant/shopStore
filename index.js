@@ -5,6 +5,9 @@ const { faker } = require('@faker-js/faker');
 const app = express();
 const port = 3000;
 
+app.use(express.json());
+
+
 app.get('/', (req, res) => {
   res.send( 'return = Home page');
 });
