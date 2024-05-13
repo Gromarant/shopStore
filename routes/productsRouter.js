@@ -20,16 +20,16 @@ router.get('/', (req, res) => {
       }
     )
   }
-  res.json( products );
+  res.status(200).json( products );
 });
 
 router.get('/filter', (req, res) => {
-  res.send('I am a filter');
+  res.status(200).send('I am a filter');
 });
 
 router.get('/:productId', (req, res) => {
   const { productId } = req.params;
-  res.json(
+  res.status(200).json(
     {
       id: productId,
     }
@@ -39,7 +39,7 @@ router.get('/:productId', (req, res) => {
 router.post('/', (req, res) => {
   const body = req.body;
 
-  res.json(
+  res.status(201).json(
     {
       message: 'created product with id: ' + body.id,
       data: body,
@@ -50,7 +50,7 @@ router.post('/', (req, res) => {
 router.patch('/:productId', (req, res) => {
   const { productId } = req.params;
 
-  res.json({
+  res.status(200).json({
     message: 'Product with id:' + productId + ' updated',
     data: req.body,
     id: productId,
@@ -60,7 +60,7 @@ router.patch('/:productId', (req, res) => {
 router.delete('/:productId', (req,res) => {
   const productId = req.params;
 
-  res.json({
+  res.status(200).json({
     message: 'Product deleted',
     id: productId,
   })
