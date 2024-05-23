@@ -1,35 +1,15 @@
-const pool = require('../utils/db_pgsql');
 const queries = require('../queries/productsQueries');
+const executeQuery = require('../utils/queryExecutor');
 
-const getProductById = async (productId) => {
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(queries.getProductById, [productId])
-        result = data.rows[0]
-    } catch (error) {
-        console.error(`Error: ${error}`);
-        throw err;
-    } finally {
-        client.release();
-    };
-    return result;
+const getProductById = async (id) => {
+    const result = await executeQuery(queries.getProductById, [id]);
+    return result.rows[0];
 };
 
 const getProducts = async () => {
-    let client, result;
-    try {
-        client = await pool.connect();
-        const data = await client.query(queries.getProducts);
-        result = data.rows;
-    } catch (error) {
-        console.error(`Error: ${error}`);
-        throw err;
-    } finally {
-        client.release();
-    };
-    return result;
-}
+    const result = await executeQuery(queries.getProducts);
+    return result.rows;
+};
 
 module.exports = {
     getProductById,

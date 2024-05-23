@@ -13,13 +13,6 @@ routerApi(app);
 
 app.get('/', (req, res) => {
   res.send( 'return = Home page');
-});
-
-app.use( (error, req, res, next) => {
-  res.status(error.statusCode || 500).json({
-    status: error.statusCode,
-    message: error.message
-  })
 })
 
 app.use(error404);
