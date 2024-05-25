@@ -11,8 +11,17 @@ const getProducts = async (req, res) => {
 
 const createProduct = async (req, res) => responseHttpHandle(Products.createProduct(req.body), req, res, 201);
 
+const updateProduct = async (req, res) => {
+  if(req.params.productId) {
+  responseHttpHandle(Products.updateProduct(req.body, req.params.productId), req, res, 200);
+  }
+  else {
+    return;
+  }
+}
 
 module.exports =  {
   getProducts,
-  createProduct
+  createProduct,
+  updateProduct
 }

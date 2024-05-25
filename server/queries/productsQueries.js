@@ -9,7 +9,15 @@ const queries =  {
         ORDER BY products.productName;`,
     createProduct: `
         INSERT INTO  products(product_uid, productName, contentWeight, productBrand, productCategory, quantity)
-        VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5);`
+        VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5);`,
+    updateProduct: `
+        UPDATE products
+        SET productName = $1,
+            contentWeight=$2,
+            productBrand=$3,
+            productCategory=$4,
+            quantity=$5
+        WHERE product_uid=$6`,
 };
 
 module.exports = queries;
