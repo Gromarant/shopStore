@@ -17,11 +17,18 @@ const updateProduct = async (req, res) => {
   }
   else {
     return;
+  };
+};
+
+const deleteProduct = async () => {
+  if(req.params.productId) {
+    responseHttpHandle(Products.deleteProduct(req.params.productId), req, res, 200);
   }
 }
 
 module.exports =  {
   getProducts,
   createProduct,
-  updateProduct
+  updateProduct,
+  deleteProduct
 }
