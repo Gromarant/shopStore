@@ -7,6 +7,9 @@ const queries =  {
         SELECT products.product_uid, products.productName, products.contentWeight, products.productBrand, products.quantity
         FROM products
         ORDER BY products.productName;`,
+    createProduct: `
+        INSERT INTO  products(product_uid, productName, contentWeight, productBrand, productCategory, quantity)
+        VALUES (uuid_generate_v4(), $1, $2, $3, $4, $5);`
 };
 
 module.exports = queries;

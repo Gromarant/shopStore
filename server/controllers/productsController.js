@@ -1,15 +1,15 @@
 const Products = require('../models/productsModel');
-const executeModel = require('../utils/modelExecutor');
+const responseHttpHandle = require('../utils/responseHandler');
 
 const getProducts = async (req, res) => {
   if(req.params.productId) {
-    executeModel(Products.getProductById(req.params.productId), req, res);
+    responseHttpHandle(Products.getProductById(req.params.productId), req, res, 200);
   } else {
-    executeModel(Products.getProducts(), req, res);
+    responseHttpHandle(Products.getProducts(), req, res, 200);
   }
 };
 
-const createProduct = async (req, res) => executeModel(Products.getProducts(Products.createProduct()), req, res);
+const createProduct = async (req, res) => responseHttpHandle(Products.createProduct(req.body), req, res, 201);
 
 
 module.exports =  {
