@@ -12,13 +12,13 @@ const getProducts = async () => {
 };
 
 const createProduct = async (product) => {
-    const { name, weight, brand, category, quantity } = product;
-    const result = await executeQuery(queries.createProduct, [ name, weight, brand, category, quantity ]);
+    const { name, unity, brand, category, quantity } = product;
+    const result = await executeQuery(queries.createProduct, [ name, unity, brand, category, quantity ]);
     const createdProduct = {
         message: "Product created",
         data: {
             name: product.name,
-            weight: product.weight,
+            unity: product.unity,
             brand: product.brand,
             category: product.category,
             quantity: product.quantity,
@@ -28,14 +28,14 @@ const createProduct = async (product) => {
     return createdProduct;
 };
 
-const updateProduct = async (product, productId) => {
-    const { name, weight, brand, category, quantity } = product;
-    const result= await executeQuery(queries.updateProduct, [name, weight, brand, category, quantity, productId])
+const updateProduct = async (product, id) => {
+    const { name, unity, brand, category, quantity } = product;
+    const result = await executeQuery(queries.updateProduct, [name, unity, brand, category, quantity, id]);
     const updateProduct = {
-        message: `Product with id ${productId} updated`,
+        message: `Product with id ${id} updated`,
         data: {
             name: product.name,
-            weight: product.weight,
+            unity: product.unity,
             brand: product.brand,
             category: product.category,
             quantity: product.quantity,
@@ -45,9 +45,24 @@ const updateProduct = async (product, productId) => {
     return updateProduct;
 };
 
+const deleteProduct = async (id) => {
+    const result = await executeQuery(queries.deleteProduct, [id]);
+    const deleteProduct =  {
+        message: `Product with id ${id} deleted`,
+        data: {
+            name: product.name,
+            unity: product.weight,
+            brand: product.brand
+        },
+        result: result.rowCount
+    };
+    return deleteProduct;
+};
+
 module.exports = {
     getProductById,
     getProducts,
     createProduct,
-    updateProduct
+    updateProduct,
+    deleteProduct
 };

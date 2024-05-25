@@ -22,10 +22,10 @@ CREATE TABLE orders (
 
 CREATE TABLE products (
     product_uid UUID NOT NULL PRIMARY KEY,
-    productName VARCHAR(50),
-    contentWeight VARCHAR(50),
-    productBrand VARCHAR(50),
-    productCategory VARCHAR(50),
+    product_name VARCHAR(50),
+    content_unity VARCHAR(50),
+    product_brand VARCHAR(50),
+    product_category VARCHAR(50),
     quantity INT
 );
 
@@ -37,14 +37,14 @@ CREATE TABLE order_items (
     FOREIGN KEY(product_uid) REFERENCES products(product_uid)
 );
 
-INSERT INTO users(user_uid, email, firstName, lastName, phone, country, city, zip, address ) 
+INSERT INTO users(user_uid, email, first_name, last_name, phone, country, city, zip, address ) 
 VALUES
 (uuid_generate_v4(), 'marian0203@gmail.com', 'Marian', 'Rodriguez', '685304669', 'Spain', 'Madrid', '28030', 'Albufera avenue' ),
 (uuid_generate_v4(), 'luis1703@gmail.com', 'Luis', 'Rodriguez', '4128885782', 'Venezuela', 'Valencia', '2001', 'Bolivar avenue' ),
 (uuid_generate_v4(), 'Migue2408@gmail.com', 'Mig', 'Macho', '655951159', 'Spain', 'Madrid', '28030', 'Albufera avenue' ),
 (uuid_generate_v4(), 'Vick1207@gmail.com', 'Vicky', 'Macho', '65555555', 'Spain', 'Madrid', '28030', 'Albufera avenue' );
 
-INSERT INTO products(product_uid, productName, contentWeight, productBrand, productCategory, quantity)
+INSERT INTO products(product_uid, product_name, content_unity, product_brand, product_category, quantity)
 VALUES
 (uuid_generate_v4(), 'Toothpaste', '150g', 'Colgate', 'Personal Care', 500),
 (uuid_generate_v4(), 'Smartphone', '200g', 'Samsung', 'Electronics', 100),
