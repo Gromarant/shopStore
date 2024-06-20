@@ -1,10 +1,10 @@
 const pool = require('./db_pgsql');
 
-const executeQuery = async (queryMethod, params=[]) => {
+const executeQuery = async (query, params=[]) => {
     let client, data;
     try {
         client = await pool.connect();
-        data = await client.query(queryMethod, [...params]);
+        data = await client.query(query, [...params]);
     } catch (err) {
         console.log(err);
         throw err;
