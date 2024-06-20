@@ -1,11 +1,12 @@
 const queries = require('../queries/startingQueries');
-const executeQuery = require('./queryExecutor');
 const data = require('../data/initialSystem.json');
+const { httpRequest, executeQuery, concatQueryInsertValues } = require('../utils'); 
+const dataPath = data["dataToInsert"];
 
 const dbCreation = async (queryMethod) => await executeQuery(queries[queryMethod]);
 const dbInsertData = async (queryMethod, params=[]) => await executeQuery(queries[queryMethod], params);
 
-// const dbInsertData = async (table_name, params, values) => await executeQuery(queries.insertMethod(table_name, params, values), params);
+const getCategoryData = (category_id) => httpRequest(`https://tienda.mercadona.es/api/categories/${category_id}/?lang=es&wh=mad1`);
 
 const createDbTables = async () => {
     const allTablesQuery = data["tables"].map(table => queries[table.queryMethod]).join('\n');
@@ -17,27 +18,31 @@ const dropTables = async () => {
     await executeQuery(`DROP TABLE ${allTablesName.join(', ')};`);
 };
 
-const insertZip = async () => await Promise.all(data["zip_codes"].map( zip => dbInsertData(zip.queryMethod, [zip.code])));
+const insertZip = async () => {
+    let values = await Promise.all(dataPath.zip["zip_codes"].map( zip => `(uuid_generate_v4(), ${zip})`));
+    return executeQuery(concatQueryInsertValues(dataPath.zip.name, dataPath.zip.params, values));
+};
 
-const insertCategories = async () => await Promise.all(data["categories"].map( category => dbInsertData(category.queryMethod, [category.id, category.name])));
+const insertCategories = async () => {
+    let values = await Promise.all(dataPath.category["categories"].map( category => `(uuid_generate_v4(), ${category.id}, '${category.name}')
+    `));
+    return executeQuery(concatQueryInsertValues(dataPath.category.name, dataPath.category.params, values));
+};
+ 
+const insertStores = async () => {
+    let values = await Promise.all(dataPath.store["stores"].map( store => `(uuid_generate_v4(), '${store.name}', '${store.address}', (SELECT id FROM zip WHERE code=${store.zip}))`));
+    return executeQuery(concatQueryInsertValues(dataPath.store.name, dataPath.store.params, values));
+};
 
-const insertStores = async () => await Promise.all(data["zip_codes"].map( zip => zip["stores"]
-                                            .map( store => dbInsertData(store.queryMethod, [store.name, store.address, zip.code]))));
 
 const dbPopulation = async () => {
-    console.time('dbPopulation: ');
     await createDbTables();
-    console.log('---- tables created --------');
     await Promise.all([
         insertZip(),
         insertCategories(),
-        ]);
-    console.log('---- zip and categories inserted --------');
+    ]);
     await insertStores();
-    console.log('---- stores inserted --------');
-        
-    console.timeEnd('dbPopulation: ');
+    await insertProductsByCategoryData(categoryData);
 };
 
 dbPopulation();
-// dropTables();

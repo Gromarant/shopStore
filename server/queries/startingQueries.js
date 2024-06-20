@@ -2,7 +2,7 @@ const queries = {
     createTableZip: `
         CREATE TABLE zip (
             id UUID NOT NULL PRIMARY KEY,
-            code INT
+            code INT UNIQUE
         );`,
     createTableCategory: `
         CREATE TABLE category (
@@ -25,7 +25,7 @@ const queries = {
             id UUID NOT NULL PRIMARY KEY,
             zip_uid UUID,
             name VARCHAR(50),
-            address VARCHAR(255),
+            address VARCHAR(255) UNIQUE,
             CONSTRAINT fk_zip 
             FOREIGN KEY(zip_uid) REFERENCES zip(id)
             ON DELETE CASCADE
@@ -35,13 +35,15 @@ const queries = {
             id UUID NOT NULL PRIMARY KEY,
             category_uid UUID,
             brand_uid UUID,
-            measure_uid UUID,
             store_uid UUID,
             id_in_store NUMERIC,
             codebar VARCHAR(50),
-            name VARCHAR(50),
+            name VARCHAR(320),
             nickname VARCHAR(255),
+            img VARCHAR(320),
             content INT,
+            measure_uid UUID,
+            packaging VARCHAR(50),
             price NUMERIC,
             CONSTRAINT fk_category 
             FOREIGN KEY(category_uid) REFERENCES category(id)
@@ -104,23 +106,7 @@ const queries = {
             CONSTRAINT fk_product
             FOREIGN KEY(product_uid) REFERENCES product(id)
             ON DELETE CASCADE
-        );`,
-    createZip: `
-        INSERT INTO zip(id, code) 
-        VALUES
-        ( uuid_generate_v4(), $1);`,
-    createCategory: `
-        INSERT INTO category (id, id_in_store, name)
-        VALUES
-        (uuid_generate_v4(), $1, $2);`,
-    createMeasure: `
-        INSERT INTO measure (id, name)
-        VALUES
-        (uuid_generate_v4(), $1);`,
-    createStore: `
-        INSERT INTO store (id, name, address, zip_uid)
-        VALUES
-        (uuid_generate_v4(), $1, $2, (SELECT id FROM zip WHERE code=$3));`,
+        );`
 };
 
 module.exports = queries;
