@@ -1,48 +1,55 @@
 const queries = require('../queries/startingQueries');
-const data = require('../data/initialSystem.json');
-const { httpRequest, executeQuery, concatQueryInsertValues } = require('../utils'); 
-const dataPath = data["dataToInsert"];
+const markerCategory = require('../data/initialSystem.json');
+const { executeQuery, concatQueryValuesToInsert, setTimeOutForCategoriesHttpCall } = require('../utils');
+const dataPath = markerCategory["dataToInsert"];
+
+const mercadonaCategories = () => dataPath["category"].categories.map(category => category.id);
+const categories = mercadonaCategories();
 
 const dbCreation = async (queryMethod) => await executeQuery(queries[queryMethod]);
 const dbInsertData = async (queryMethod, params=[]) => await executeQuery(queries[queryMethod], params);
 
-const getCategoryData = (category_id) => httpRequest(`https://tienda.mercadona.es/api/categories/${category_id}/?lang=es&wh=mad1`);
-
-const createDbTables = async () => {
-    const allTablesQuery = data["tables"].map(table => queries[table.queryMethod]).join('\n');
-    await executeQuery(allTablesQuery);
-};
-
 const dropTables = async () => {
-    const allTablesName = data["tables"].map(table => table.name).reverse();
+    const allTablesName = markerCategory["tables"].map(table => table.name).reverse();
     await executeQuery(`DROP TABLE ${allTablesName.join(', ')};`);
 };
 
+const createDbTables = async () => {
+    const allTablesQuery = markerCategory["tables"].map(table => queries[table.queryMethod]).join('\n');
+    await executeQuery(allTablesQuery);
+};
+
 const insertZip = async () => {
-    let values = await Promise.all(dataPath.zip["zip_codes"].map( zip => `(uuid_generate_v4(), ${zip})`));
-    return executeQuery(concatQueryInsertValues(dataPath.zip.name, dataPath.zip.params, values));
+    const values = await Promise.all(dataPath.zip["zip_codes"].map( zip => `(uuid_generate_v4(), ${zip})`));
+    return executeQuery(concatQueryValuesToInsert(dataPath.zip.name, dataPath.zip.params, values));
 };
 
 const insertCategories = async () => {
-    let values = await Promise.all(dataPath.category["categories"].map( category => `(uuid_generate_v4(), ${category.id}, '${category.name}')
+    const values = await Promise.all(dataPath.category["categories"].map( category => `(uuid_generate_v4(), ${category.id}, '${category.name}')
     `));
-    return executeQuery(concatQueryInsertValues(dataPath.category.name, dataPath.category.params, values));
-};
- 
-const insertStores = async () => {
-    let values = await Promise.all(dataPath.store["stores"].map( store => `(uuid_generate_v4(), '${store.name}', '${store.address}', (SELECT id FROM zip WHERE code=${store.zip}))`));
-    return executeQuery(concatQueryInsertValues(dataPath.store.name, dataPath.store.params, values));
+    return executeQuery(concatQueryValuesToInsert(dataPath.category.name, dataPath.category.params, values));
 };
 
+const insertStores = async () => {
+    const values = await Promise.all(dataPath.store["stores"].map( store => `(uuid_generate_v4(), '${store.name}', '${store.address}', (SELECT id FROM zip WHERE code=${store.zip}))`));
+    return executeQuery(concatQueryValuesToInsert(dataPath.store.name, dataPath.store.params, values));
+};
+
+
+const insertProductsByCategoryData = async () => {
+    await setTimeOutForCategoriesHttpCall(categories, dataPath);
+};
 
 const dbPopulation = async () => {
+    console.time('dbPopulation: ');
     await createDbTables();
     await Promise.all([
         insertZip(),
         insertCategories(),
     ]);
     await insertStores();
-    await insertProductsByCategoryData(categoryData);
+    await insertProductsByCategoryData();
+    console.timeEnd('dbPopulation: ');
 };
 
 dbPopulation();
