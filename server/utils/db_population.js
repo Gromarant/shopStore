@@ -44,6 +44,11 @@ const insertProductsByCategoryData = async () => {
     await setTimeOutForCategoriesHttpCall(categories, dataPath);
 };
 
+const insertLocations = async () => {
+    const values = await Promise.all(dataPath.location["locations"].map( location => `(uuid_generate_v4(), '${location}')`));
+    return executeQuery(concatQueryValuesToInsert(dataPath.location.name, dataPath.location.params, values));
+};
+
 const dbPopulation = async () => {
     console.time('dbPopulation: ');
     await createDbTables();
@@ -54,6 +59,7 @@ const dbPopulation = async () => {
     await insertStores();
     await insertMeasures();
     await insertProductsByCategoryData();
+    await insertLocations();
     console.timeEnd('dbPopulation: ');
 };
 
