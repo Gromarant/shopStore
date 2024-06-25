@@ -1,5 +1,6 @@
 const httpRequest = require('./httpRequest');
 const executeQuery = require('./queryExecutor');
+const responseHandler = require('./responseHandler');
 
 const getRandomTimeout = (max, min) => Math.floor(Math.random() * (max - min + 1) + min);
 
@@ -28,7 +29,6 @@ let categoryDataToInsert;
             return `(uuid_generate_v4(), (SELECT id FROM category WHERE id_in_store=${current_category.id}), (SELECT id FROM store WHERE address='${storePath[0].address}'), (SELECT id FROM measure WHERE name='${measure_unit}'), ${product.id}, '${product.display_name}', '${product.thumbnail}', ${total_content}, '${product.packaging}', ${product["price_instructions"].unit_price})`
         }
     }));
-    console.log('stored data from category: ', current_category);
     return executeQuery(concatQueryValuesToInsert(dataPath.product.name, dataPath.product.params, values));
 };
 
@@ -43,6 +43,7 @@ const unitForLowerContent = (unit) => unit === 'L' ? "ml" : "g";
 module.exports = {
     httpRequest,
     executeQuery,
+    responseHandler,
     getRandomTimeout,
     concatQueryValuesToInsert,
     getCategoryData,

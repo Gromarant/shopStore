@@ -1,5 +1,3 @@
-const Products = require('../models/productsModel');
-
 const responseHttpHandle = async (modelMethod, req, res, statusCode) => {
     try {
         let result = await modelMethod;
