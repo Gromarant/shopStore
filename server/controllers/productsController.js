@@ -1,30 +1,33 @@
 const Products = require('../models/productsModel');
-const responseHttpHandle = require('../utils/responseHandler');
+const { responseHandler } = require('../utils');
+
 
 const getProducts = async (req, res) => {
-  if(req.params.productId) {
-    responseHttpHandle(Products.getProductById(req.params.productId), req, res, 200);
+  if(req.params.id) {
+    responseHandler(Products.getProductById(req.params.id), req, res, 200);
+  } else if(req.params.pattern) {
+    responseHandler(Products.getProductByMatch(req.params.pattern), req, res, 200);
   } else {
-    responseHttpHandle(Products.getProducts(), req, res, 200);
-  }
+    responseHandler(Products.getProducts(), req, res, 200);
+  };
 };
 
-const createProduct = async (req, res) => responseHttpHandle(Products.createProduct(req.body), req, res, 201);
+const createProduct = async (req, res) => responseHandler(Products.createProduct(req.body), req, res, 201);
 
 const updateProduct = async (req, res) => {
-  if(req.params.productId) {
-  responseHttpHandle(Products.updateProduct(req.body, req.params.productId), req, res, 200);
+  if(req.params.id) {
+  responseHandler(Products.updateProduct(req.body, req.params.id), req, res, 200);
   }
   else {
     return;
   };
 };
 
-const deleteProduct = async () => {
-  if(req.params.productId) {
-    responseHttpHandle(Products.deleteProduct(req.params.productId), req, res, 200);
-  }
-}
+const deleteProduct = async (req, res) => {
+  if(req.params.id) {
+    responseHandler(Products.deleteProduct(req.params.id), req, res, 200);
+  };
+};
 
 module.exports =  {
   getProducts,

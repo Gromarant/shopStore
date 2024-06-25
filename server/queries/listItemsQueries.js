@@ -1,17 +1,17 @@
 const queries =  {
-    getListItemsById: `
+    getListItemById: `
         SELECT list_items.id as "uid", list_items.product_uid as "product"
         FROM list_items
         WHERE id=$1;`,
-    createListItems: `
+    createListItem: `
         INSERT INTO list_items(id, product_uid)
         VALUES
         (uuid_generate_v4(), (SELECT id FROM product WHERE id=$1));`,
-    updateListItems: `
+    updateListItem: `
         UPDATE list_items
         SET product_uid=(SELECT id FROM product WHERE id=$2)
         WHERE id=$1;`,
-    deleteListItems: `
+    deleteListItem: `
         DELETE FROM list_items
         WHERE id=$1;`
 };

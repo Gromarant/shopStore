@@ -1,17 +1,17 @@
-const ListItems = require('../models/listItemsModels');
+const ListItems = require('../models/listItemsModel');
 const { responseHandler } = require('../utils');
 
 const getListItems = async (req, res) => {
     if(req.params.id) {
-        responseHandler(ListItems.getListItemsById(req.params.id), req, res, 200);
+        responseHandler(ListItems.getListItemById(req.params.id), req, res, 200);
     };
 };
 
-const createListItems = async (req, res) => responseHandler(ListItems.createListItems(req.body), req, res, 201);
+const createListItems = async (req, res) => responseHandler(ListItems.createListItem(req.body), req, res, 201);
 
 const updateListItems = async (req, res) => {
     if(req.params.id) {
-        responseHandler(ListItems.updateListItems(req.body, req.params.id), req, res, 200);
+        responseHandler(ListItems.updateListItem(req.body, req.params.id), req, res, 200);
     }
     else {
       return;
@@ -20,7 +20,7 @@ const updateListItems = async (req, res) => {
 
 const deleteListItems = async (req, res) => {
     if(req.params.id) {
-      responseHandler(ListItems.deleteListItems(req.params.id), req, res, 200);
+      responseHandler(ListItems.deleteListItem(req.params.id), req, res, 200);
     };
 };
 
