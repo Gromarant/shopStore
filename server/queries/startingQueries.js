@@ -36,13 +36,13 @@ const queries = {
             category_uid UUID,
             brand_uid UUID,
             store_uid UUID,
+            measure_uid UUID,
             id_in_store NUMERIC,
             codebar VARCHAR(50),
             name VARCHAR(320),
             nickname VARCHAR(255),
             img VARCHAR(320),
             content INT,
-            measure_uid UUID,
             packaging VARCHAR(50),
             price NUMERIC,
             CONSTRAINT fk_category 
@@ -78,8 +78,8 @@ const queries = {
             FOREIGN KEY(location_uid) REFERENCES location(id)
             ON DELETE CASCADE
         );`,
-    createTableList: `
-        CREATE TABLE list (
+    createTableListItems: `
+        CREATE TABLE list_items (
             id UUID NOT NULL PRIMARY KEY,
             product_uid UUID,
             CONSTRAINT fk_store
