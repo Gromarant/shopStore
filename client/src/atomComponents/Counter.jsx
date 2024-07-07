@@ -18,7 +18,7 @@ function Counter({count}) {
     return (
         <section className='flex_r counter'>
             <button className='btn unvisible' onClick={() => handleCounter('-')}>{'-'}</button>
-            <input className='cart_input' type='number' onChange={e => setCounter(e.target.value)} value={counter}/>
+            <input className='input cart_input' type='number' onChange={e => setCounter(e.target.value)} value={counter}/>
             <button className='btn unvisible' onClick={() => handleCounter('+')}>{'+'}</button> 
             <div className='trash_container'>
                 <BsTrash className='trash'/>
