@@ -11,7 +11,7 @@ function NavBar () {
     return (
         <nav>
             <ul className='navBar'>
-                {navLinks?.map(link => <NavLink path={link.path} text={link.text} state={active} handle={() => handleActiveBtn(link.path)} key={link.path}/>)}
+                {navLinks?.map(link => <NavLink path={link.path} text={link.text} state={active} icon={link.icon} handle={() => handleActiveBtn(link.path)} key={link.path}/>)}
             </ul>
         </nav>
     )
