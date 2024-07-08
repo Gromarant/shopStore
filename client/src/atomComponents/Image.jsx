@@ -9,7 +9,7 @@ function Image({img}) {
     };
 
     return (
-        <div style={background} className='cart_img back_img'>
+        <div style={background} className='img'>
             {favorite ? 
                 <MdOutlineStar className='star' onClick={() => setFavorite(!favorite)}/> 
                 : 

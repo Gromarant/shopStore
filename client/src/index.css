@@ -1,0 +1,297 @@
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.font_6 {
+    font-size: 6px;
+}
+
+.font_8 {
+    font-size: 8px;
+}
+
+.font_12 {
+    font-size: 12px;
+}
+
+.navBar {
+    background-color: rgb(210, 220, 228);
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    list-style: none;
+    right: 0;
+    padding: 8px 24px;
+    position: fixed;
+    text-align: center;
+    text-wrap: wrap;
+    width: 100%;
+}
+
+.icon_div {
+    align-items: center;
+    background-color: rgb(74, 91, 85);
+    border-radius: 50%;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    margin: 8px;
+    width: 40px;
+}
+
+.cart {
+    border: solid 0.2px #767474;
+    border-radius: 8px;
+}
+
+.cart.search,
+.cart.pantry {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    width: 156px;
+}
+
+.cart.search .content, 
+.cart.pantry .content {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.cart.shopList .content,
+.cart.shopListEdit .content {
+    align-items: flex-start;
+    display: flex;
+    gap: 4px;
+    margin: 0 28px;
+}
+
+.logo {
+    background-color: #767474;
+    height: 24px;
+    margin: 4px;
+    width: 24px;
+    border-radius: 50%;
+}
+
+
+.logo.img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.check {
+    padding: 8px;
+}
+
+.cart .content .img {
+    background-color: aqua;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 4px;
+    height: 72px;
+    min-width: 100px;
+    width: 100px;
+}
+
+.shopList .content .img {
+    height: 85px;
+}
+.shopListEdit .content .img {
+    height: 90px;
+}
+
+.star {
+    float: right;
+    position: relative;
+    top: calc(72px - 32px);
+    margin: 8px;
+}
+.shopList .star {
+    top: calc(85px - 32px);
+}
+.shopListEdit .star {
+    top: calc(90px - 32px);
+}
+
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cart_text {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 90%;
+    margin: 4px 0 8px 0;
+}
+.price_contaner {
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.content_bar {
+    width: 100px;
+    align-self: center;
+}
+
+.counter {
+    justify-content: space-between;
+}
+
+.trash_container {
+    align-items: center;
+    display: flex;
+    background-color: #767474;
+    border-radius: 50%;
+    height: 22px;
+    justify-content: center;
+    place-items: center;
+    width: 22px;
+}
+
+
+.counter .input {
+    width: 20%;
+}
+
+.input_content {
+    border-radius: 12px;
+    border: none;
+    padding-left: 3px;
+    width: 80%;
+}
+
+.input_content:focus-visible {
+    border: none;
+}
+
+.input {
+    border: solid 0.2px #767474;
+    border-radius: 12px;
+    padding: 0 1px;
+    text-align: center;
+}
+.label_amount {
+    gap: 4px;
+}
+.amount_label {
+    display: grid;
+    gap: 2px;
+}
+
+.trash {
+    color: white;
+    font-size: 10px;
+}
+
+.btn {
+    width: 32px;
+    background-color: transparent;
+    border: none;
+}
+
+.active {
+    background-color: #24C2AF;
+}
+
+.edit {
+    align-items: center;
+    background-color: #767474;
+    border-radius: 50%;
+    display: flex;
+    height: 16px;
+    justify-content: center;
+    margin: 8px;
+    width: 16px;
+}
+
+.edit .icon {
+    font-size: 50%;
+    color: white;
+}
+
+.close {
+    color: #767474;
+}
+
+.icon {
+    color: #C2EDE8;
+    font-size: 22px;
+}
+.arrow {
+    color: #767474;
+    font-size: 20px;
+}
+.arrow.up {
+    transform: rotate(180deg);
+}
+.arrow.down {
+    transform: none;
+}
+
+.dropDownLabel {
+    align-items: center;
+    border: none;
+    border-radius: 8px;
+    display: flex;
+    font-size: 20px;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.flex_r {
+    display: flex;
+    align-items: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    height: 100%;
+    margin: 24px 16px 100px;
+}
+
+.bill,
+.bill .container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+}
+.billCard {
+    align-items: center;
+    background-color: beige;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+.navBar li {
+    min-width: 70px;
+}
+.navBar li a {
+    align-items: center;
+    color: #767474;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    text-decoration: none;
+}
+
+.hidden {
+    display: none;
+}
