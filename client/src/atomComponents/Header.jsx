@@ -1,14 +1,13 @@
+import { MdOutlineEdit } from "react-icons/md";
+import Logo from "./Logo";
+
 function Header({type, logo}) {
-    const background = {
-        backgroundImage: `url(${logo}) `,
-        borderRadius: '50%'
-    }
     return (
-        <header className='flex_r header_cart'>
-            <div style={background} className='logo_store back_img'></div>
+        <header className='header'>
+            <Logo img={logo}/>
             {type === 'edit' ? 
-                <div>
-                    <div className='edit'></div>
+                <div className='edit'>
+                    <MdOutlineEdit className='icon'/>
                 </div> : null}
             {type === 'check' ? <div className='check'><input type='checkbox' name="addToList"/></div> : null}
         </header>
