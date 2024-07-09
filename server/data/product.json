@@ -1,0 +1,134 @@
+{
+    "id": "4717",
+    "ean": "9904000047175",
+    "slug": "aceite-oliva-virgen-extra-hacendado-garrafa",
+    "brand": "Hacendado",
+    "limit": 999,
+    "badges": {
+        "is_water": false,
+        "requires_age_check": false
+    },
+    "origin": "Puente de Génave, Sierra de Segura. Jaén.",
+    "photos": [
+        {
+            "zoom": "https://prod-mercadona.imgix.net/images/f59ef64a2984bb74e7bfa40270605438.jpg?fit=crop&h=1600&w=1600",
+            "regular": "https://prod-mercadona.imgix.net/images/f59ef64a2984bb74e7bfa40270605438.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/f59ef64a2984bb74e7bfa40270605438.jpg?fit=crop&h=300&w=300",
+            "perspective": 2
+        },
+        {
+            "zoom": "https://prod-mercadona.imgix.net/images/1dd1adb80dc13f201c9bc9f51b43b285.jpg?fit=crop&h=1600&w=1600",
+            "regular": "https://prod-mercadona.imgix.net/images/1dd1adb80dc13f201c9bc9f51b43b285.jpg?fit=crop&h=600&w=600",
+            "thumbnail": "https://prod-mercadona.imgix.net/images/1dd1adb80dc13f201c9bc9f51b43b285.jpg?fit=crop&h=300&w=300",
+            "perspective": 9
+        }
+    ],
+    "details": {
+        "brand": "Hacendado",
+        "origin": "Puente de Génave, Sierra de Segura. Jaén.",
+        "suppliers": [
+            {
+                "name": "ACEITES MAEVA S.L.U"
+            },
+            {
+                "name": "Aceites Oro Bailén Galgon 99 SLU, S.L.U."
+            },
+            {
+                "name": "Aceites del Sur- Coosur S.A."
+            },
+            {
+                "name": "Agrícola de Bailén Virgen de Zocueca, S.C.A"
+            },
+            {
+                "name": "Jaencoop SCA"
+            },
+            {
+                "name": "MERCADONA"
+            },
+            {
+                "name": "MERCAOLEO"
+            },
+            {
+                "name": "Oleoestepa S.C.A."
+            },
+            {
+                "name": "Oleoestepa, S.Coop.And."
+            },
+            {
+                "name": "Sovena España S.A.U"
+            }
+        ],
+        "legal_name": "Aceite de Oliva virgen extra",
+        "description": "Aceite de oliva virgen extra Hacendado",
+        "counter_info": null,
+        "danger_mentions": "",
+        "alcohol_by_volume": null,
+        "mandatory_mentions": "",
+        "production_variant": "",
+        "usage_instructions": "",
+        "storage_instructions": ""
+    },
+    "is_bulk": false,
+    "packaging": "Garrafa",
+    "published": true,
+    "share_url": "https://tienda.mercadona.es/product/4717/aceite-oliva-virgen-extra-hacendado-garrafa",
+    "thumbnail": "https://prod-mercadona.imgix.net/images/f59ef64a2984bb74e7bfa40270605438.jpg?fit=crop&h=300&w=300",
+    "categories": [
+        {
+            "id": 12,
+            "name": "Aceite, especias y salsas",
+            "level": 0,
+            "order": 7,
+            "categories": [
+                {
+                    "id": 112,
+                    "name": "Aceite, vinagre y sal",
+                    "level": 1,
+                    "order": 7,
+                    "categories": [
+                        {
+                            "id": 420,
+                            "name": "Aceite de oliva",
+                            "level": 2,
+                            "order": 7
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "extra_info": [
+        null
+    ],
+    "display_name": "Aceite de oliva virgen extra Hacendado",
+    "unavailable_from": null,
+    "is_variable_weight": false,
+    "price_instructions": {
+        "iva": 5,
+        "is_new": false,
+        "is_pack": false,
+        "pack_size": null,
+        "unit_name": null,
+        "unit_size": 3.0,
+        "bulk_price": "9.60",
+        "unit_price": "28.80",
+        "approx_size": false,
+        "size_format": "l",
+        "total_units": null,
+        "unit_selector": true,
+        "bunch_selector": false,
+        "drained_weight": null,
+        "selling_method": 0,
+        "price_decreased": false,
+        "reference_price": "9.600",
+        "min_bunch_amount": 1.0,
+        "reference_format": "L",
+        "previous_unit_price": "       29.55",
+        "increment_bunch_amount": 1.0
+    },
+    "unavailable_weekdays": [],
+    "nutrition_information": {
+        "allergens": " <strong>x99</strong>.",
+        "ingredients": ""
+    }
+}
