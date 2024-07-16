@@ -1,13 +1,13 @@
-function CheckInput({label}) {
+function CheckInput({label, id, handle}) {
     return (
-        <form className='check flex_r'>
+        <div className='check flex_r'>
             {label ?  
                 <label className='label'>
                     {label}
                     <input type='checkbox'/>
                 </label>
-            : <input className='check' type='checkbox'/>}
-        </form>
+            : <input className='checkbox' id={id} type='checkbox' onChange={(e) => handle(e.target)}/>}
+        </div>
     );
 };
 

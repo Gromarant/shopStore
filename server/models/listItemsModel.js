@@ -6,38 +6,44 @@ const getListItemById = async (id) => {
     return result.rows[0];
 };
 
-const createListItem = async (product) => {
-    const { id } = product;
-    const result = await executeQuery(queries.createListItem, [ id ]);
-    const createdListItem = {
-        message: 'ListItem created',
-        data: {
-            product
-        },
-        result: result.rowCount
-    };
+const createListItem = (products) => {
+    let createdListItem;
+    products?.map(async(product) => {
+        const result = await executeQuery(queries.createListItem, [ product.uid, product.quantity ]);
+            createdListItem = {
+            message: 'ListItem created',
+            data: {
+                product
+            },
+            result: result.rowCount
+        };
+    })
     return createdListItem;
 };
 
 const updateListItem = async (listItem, listItemId) => {
-    const { productId } = listItem;
-    const result = await executeQuery(queries.updateListItem, [listItemId, productId ]);
+    const { productId, quantity } = listItem;
+    const result = await executeQuery(queries.updateListItem, [listItemId, productId, quantity ]);
     const updatedListItem = {
         message: `ListItem with id ${listItemId} updated`,
         data: {
-            product: productId
+            product: productId,
+            quantity,
         },
         result: result.rowCount
     };
     return updatedListItem;
 };
 
-const deleteListItem = async (id) => {
-    const result = await executeQuery(queries.deleteListItem, [id]);
-    const deletedlistItem =  {
-        message: `ListItem with id ${id} deleted`,
-        result: result.rowCount
-    };
+const deleteListItem = async (products) => {
+    let deletedlistItem;
+    products?.map(async(product) => {
+        const result = await executeQuery(queries.deleteListItem, [product.uid]);
+        deletedlistItem =  {
+            message: `ListItem with id ${product.uid} deleted`,
+            result: result.rowCount
+        };
+    })
     return deletedlistItem;
 };
 

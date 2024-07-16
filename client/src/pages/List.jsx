@@ -1,13 +1,10 @@
-import { useContext } from 'react';
 import { logoStore, pricePerKg } from '../utils/card';
-import { shoppingListContext } from '../context/shoppingListContext';
 import { ShoppingCard } from '../components';
 
 
 
 
 function List() {
-    const {shoppingList} = useContext(shoppingListContext);
     const handleCheckedELement = (element) => console.log(element);
 
     return (

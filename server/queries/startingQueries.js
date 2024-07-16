@@ -82,6 +82,7 @@ const queries = {
         CREATE TABLE list_items (
             id UUID NOT NULL PRIMARY KEY,
             product_uid UUID,
+            quantity INT,
             CONSTRAINT fk_store
             FOREIGN KEY(product_uid) REFERENCES product(id)
             ON DELETE CASCADE

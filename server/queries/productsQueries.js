@@ -1,17 +1,24 @@
+const productFullQuery = `
+    SELECT product.id as "uid", category.name as "category", brand.name as "brand", measure.name as "measure", store.name as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
+    FROM product
+    LEFT JOIN category ON category.id=product.category_uid
+    LEFT JOIN brand ON brand.id=product.brand_uid
+    LEFT JOIN measure ON measure.id=product.measure_uid
+    LEFT JOIN store ON store.id=product.store_uid
+    ORDER BY category
+`;
+
 const queries =  {
     getProductById: `
-        SELECT product.id as "uid", product.category_uid as "category", product.brand_uid as "brand", product.measure_uid as "measure", product.store_uid as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
-        FROM product
+        ${productFullQuery}
         WHERE id=$1;`,
     getMatchProducts: `
-        SELECT product.id as "uid", product.category_uid as "category",product.brand_uid as "brand", product.measure_uid as "measure", product.store_uid as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
-        FROM product
+        ${productFullQuery}
         WHERE name ILIKE $1
         OR nickname ILIKE $2;`,
-    getProducts: `
-        SELECT product.id as "uid", product.category_uid as "category",product.brand_uid as "brand", product.measure_uid as "measure", product.store_uid as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
-        FROM product
-        ORDER BY category;`,
+    getProducts: ` 
+        ${productFullQuery};
+        `,
     createProduct: `
         INSERT INTO  product(id, id_in_store, name, img, packaging, store_ui, measure_ui, content, category_uid,price, brand_ui, codebar, nickname)
         VALUES 

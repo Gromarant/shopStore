@@ -1,9 +1,11 @@
-import { NavBar } from './NavBar';
-import { SearchBar } from './SearchBar';
-import { SearchCard } from './SearchCard';
+import NavBar from './NavBar';
+import SearchBar from './SearchBar';
+import RegularCard from './RegularCard';
+import ShoppingCard from './ShoppingCard';
 
 export {
     NavBar,
     SearchBar,
-    SearchCard
+    RegularCard,
+    ShoppingCard
 };

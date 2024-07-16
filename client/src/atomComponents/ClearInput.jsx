@@ -3,7 +3,7 @@ import { IoMdCloseCircle } from "react-icons/io";
 
 function ClearInput({validation, content}) {
     let [count, setCount] = useState(parseFloat(content).toFixed(2));
-    const { type,  } = validation;
+    const { type } = validation;
     
     return (
         <form>

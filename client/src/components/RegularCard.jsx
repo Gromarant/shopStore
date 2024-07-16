@@ -1,12 +1,14 @@
-import { Image, Logo, LabelAmount } from '../atomComponents';
+import { Image, Logo, LabelAmount, Counter } from '../atomComponents';
 
-function SearchCard({ id, logo, img, name, brand, labelOne, labelTwo, handle}) {
+function RegularCard({
+    id, logo, img, name, brand, labelOne, labelTwo, setQuantity, count = 0,
+}) {
     return (
-        <article className='card search'>
+        <article className='card search' id={`card${id}`}>
             <header className='header'>
                 <Logo img={logo}/>
                 <div className='check flex_r'>
-                    <input className='checkbox' id={id} type='checkbox' onChange={(e) => handle(e.target)}/>
+                    <input className='checkbox' id={id} type='checkbox' checked={count > 0} onChange={(e) => setQuantity(e.target.checked ? 1 : 0)}/>
                 </div>
             </header>
             <section className='content'>
@@ -18,10 +20,15 @@ function SearchCard({ id, logo, img, name, brand, labelOne, labelTwo, handle}) {
                         <LabelAmount data={{title: labelOne.title, amount: labelOne.amount, currency: labelOne.currency,  unit: labelOne.unit, edit: false}}/>
                         <LabelAmount data={{title: labelTwo.title, amount: labelTwo.amount, currency: labelTwo.currency,  unit: labelTwo.unit, edit: false}}/>
                     </section>
+                    <Counter
+                        count={count}
+                        setCount={setQuantity}
+
+                    />
                 </section>
             </section>
         </article>
     );
 };
 
-export default SearchCard;
+export default RegularCard;

@@ -1,7 +1,6 @@
 import { Link } from 'react-router-dom';
 
 function NavLink({path, text, state, icon, handle}) {
-
     return (
         <li>
             <Link to={path} onClick={handle}>

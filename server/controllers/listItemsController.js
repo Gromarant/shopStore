@@ -7,7 +7,10 @@ const getListItems = async (req, res) => {
     };
 };
 
-const createListItems = async (req, res) => responseHandler(ListItems.createListItem(req.body), req, res, 201);
+const createListItems = async (req, res) => {
+    responseHandler(ListItems.deleteListItem(req.body), req, res, 201);
+    responseHandler(ListItems.createListItem(req.body), req, res, 201);
+};
 
 const updateListItems = async (req, res) => {
     if(req.params.id) {
@@ -19,8 +22,8 @@ const updateListItems = async (req, res) => {
 };
 
 const deleteListItems = async (req, res) => {
-    if(req.params.id) {
-      responseHandler(ListItems.deleteListItem(req.params.id), req, res, 200);
+    if(req.body) {
+      responseHandler(ListItems.deleteListItem(req.body), req, res, 200);
     };
 };
 
