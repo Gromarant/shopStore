@@ -3,33 +3,26 @@ const { responseHandler } = require('../utils');
 
 const getListItems = async (req, res) => {
     if(req.params.id) {
-        responseHandler(ListItems.getListItemById(req.params.id), req, res, 200);
+        await responseHandler(ListItems.getListItemById(req.params.id), req, res, 200);
     };
 };
 
-const createListItems = async (req, res) => {
-    responseHandler(ListItems.deleteListItem(req.body), req, res, 201);
-    responseHandler(ListItems.createListItem(req.body), req, res, 201);
-};
-
-const updateListItems = async (req, res) => {
-    if(req.params.id) {
-        responseHandler(ListItems.updateListItem(req.body, req.params.id), req, res, 200);
+const putListItems = async (req, res) => {
+    const handler = async () => {
+        await ListItems.deleteListItem();
+        await ListItems.createListItem(req.body);
     }
-    else {
-      return;
-    };
+    await responseHandler(await handler(), req, res, 201);
 };
 
 const deleteListItems = async (req, res) => {
     if(req.body) {
-      responseHandler(ListItems.deleteListItem(req.body), req, res, 200);
+        await responseHandler(ListItems.deleteListItem(), req, res, 200);
     };
 };
 
 module.exports = {
     getListItems,
-    createListItems,
-    updateListItems,
+    putListItems,
     deleteListItems
 };

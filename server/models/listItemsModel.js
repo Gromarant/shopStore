@@ -35,17 +35,7 @@ const updateListItem = async (listItem, listItemId) => {
     return updatedListItem;
 };
 
-const deleteListItem = async (products) => {
-    let deletedlistItem;
-    products?.map(async(product) => {
-        const result = await executeQuery(queries.deleteListItem, [product.uid]);
-        deletedlistItem =  {
-            message: `ListItem with id ${product.uid} deleted`,
-            result: result.rowCount
-        };
-    })
-    return deletedlistItem;
-};
+const deleteListItem = async () => await executeQuery(queries.deleteListItem);
 
 module.exports = {
     getListItemById,

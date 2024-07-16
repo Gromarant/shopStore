@@ -27,8 +27,7 @@ const queries =  {
             quantity=$3,
         WHERE id=$1;`,
     deleteListItem: `
-        DELETE FROM list_items
-        WHERE id=$1;`
+        DELETE FROM list_items;`
 };
 
 module.exports = queries;
