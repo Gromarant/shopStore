@@ -3,7 +3,6 @@ import Bill from './Bill';
 import Pantry from './Pantry';
 import Sale from './Sale';
 import List from './List';
-import Search from './Search';
 
 function Router() {
 
@@ -14,7 +13,6 @@ function Router() {
         <Route path='/pantry' element={<Pantry/>}/>
         <Route path='/sale' element={<Sale/>}/>
         <Route path='/list' element={<List/>}/>
-        <Route path='/search' element={<Search/>}/>
       </Routes>
     </main>
   )
