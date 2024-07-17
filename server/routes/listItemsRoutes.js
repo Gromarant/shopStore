@@ -3,7 +3,7 @@ const { getListItems, putListItems, deleteListItems } = require('../controllers/
 
 const router = express.Router();
 
-router.get('/:id', getListItems);
+router.get('/', getListItems);
 router.post('/', putListItems);
 router.delete('/', deleteListItems);
 

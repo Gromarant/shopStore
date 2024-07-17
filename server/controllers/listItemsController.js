@@ -2,9 +2,7 @@ const ListItems = require('../models/listItemsModel');
 const { responseHandler } = require('../utils');
 
 const getListItems = async (req, res) => {
-    if(req.params.id) {
-        await responseHandler(ListItems.getListItemById(req.params.id), req, res, 200);
-    };
+    await responseHandler(ListItems.getListItems(), req, res, 200);
 };
 
 const putListItems = async (req, res) => {

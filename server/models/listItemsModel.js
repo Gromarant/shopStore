@@ -1,9 +1,9 @@
 const queries = require('../queries/listItemsQueries');
 const { executeQuery } = require('../utils');
 
-const getListItemById = async (id) => {
-    const result = await executeQuery(queries.getListItemById, [id]);
-    return result.rows[0];
+const getListItems = async () => {
+    const result = await executeQuery(queries.getListItems);
+    return result.rows;
 };
 
 const createListItem = (products) => {
@@ -38,7 +38,7 @@ const updateListItem = async (listItem, listItemId) => {
 const deleteListItem = async () => await executeQuery(queries.deleteListItem);
 
 module.exports = {
-    getListItemById,
+    getListItems,
     createListItem,
     updateListItem,
     deleteListItem

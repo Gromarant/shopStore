@@ -9,14 +9,13 @@ const productFullQuery = `
 `;
 
 const queries =  {
-    getListItemById: `
+    getListItems: `
         WITH full_products as (
             ${productFullQuery}
         )
         SELECT *
         FROM list_items
-        JOIN full_products ON full_products.uid = list_items.product_uid
-        WHERE id=$1;`,
+        JOIN full_products ON full_products.uid = list_items.product_uid;`,
     createListItem: `
         INSERT INTO list_items(id, product_uid, quantity)
         VALUES
