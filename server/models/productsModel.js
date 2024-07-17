@@ -1,9 +1,13 @@
 const queries = require('../queries/productsQueries');
-const { executeQuery, httpRequest } = require('../utils');
+const { executeQuery /*,httpRequest*/ } = require('../utils');
 
-const product_url = (product_id) => `https://tienda.mercadona.es/api/products/${product_id}/?lang=es&wh=mad1`;
+// const product_url = (product_id) => `https://tienda.mercadona.es/api/products/${product_id}/?lang=es&wh=mad1`;
 
-const getProductById = async (id) => httpRequest(product_url(id));
+// const getProductById = async (id) => httpRequest(product_url(id));
+const getProductById = async (id) => {
+    const result = await executeQuery(queries.getProductById, [id]);
+    return result.rows[0];
+};
 
 const getProductByMatch = async (pattern) => {
     const result = await executeQuery(queries.getMatchProducts, [pattern]);
