@@ -23,7 +23,6 @@ function RegularCard({
                     <Counter
                         count={count}
                         setCount={setQuantity}
-
                     />
                 </section>
             </section>
