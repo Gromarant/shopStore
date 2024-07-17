@@ -13,7 +13,7 @@ const queries =  {
         WITH full_products as (
             ${productFullQuery}
         )
-        SELECT *
+        SELECT full_products.*, list_items.quantity
         FROM list_items
         JOIN full_products ON full_products.uid = list_items.product_uid;`,
     createListItem: `
