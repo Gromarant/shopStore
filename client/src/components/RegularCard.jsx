@@ -1,10 +1,10 @@
 import { Image, Logo, LabelAmount, Counter } from '../atomComponents';
 
 function RegularCard({
-    id, logo, img, name, brand, labelOne, labelTwo, setQuantity, count = 0,
+    style, id, logo, img, name, brand, labelOne, labelTwo, setQuantity, count = 0,
 }) {
     return (
-        <article className='card search' id={`card${id}`}>
+        <article className={`card ${style}`} id={`card${id}`}>
             <header className='header'>
                 <Logo img={logo}/>
                 <div className='check flex_r'>
