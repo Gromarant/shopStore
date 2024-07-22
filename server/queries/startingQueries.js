@@ -45,6 +45,7 @@ const queries = {
             content INT,
             packaging VARCHAR(50),
             price NUMERIC,
+            favorite BOOLEAN NOT NULL,
             CONSTRAINT fk_category 
             FOREIGN KEY(category_uid) REFERENCES category(id)
             ON DELETE CASCADE,

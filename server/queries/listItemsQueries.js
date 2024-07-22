@@ -1,5 +1,5 @@
 const productFullQuery = `
-    SELECT product.id as "uid", category.name as "category", brand.name as "brand", measure.name as "measure", store.name as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
+    SELECT product.id as "uid", product.favorite, category.name as "category", brand.name as "brand", measure.name as "measure", store.name as "store", product.id_in_store as "id", product.codebar as "codebar",  product.name as "name", product.nickname as "nickname", product.content as "content", product.price as "price", product.img as "img"
     FROM product
     LEFT JOIN category ON category.id=product.category_uid
     LEFT JOIN brand ON brand.id=product.brand_uid
