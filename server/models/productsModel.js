@@ -36,17 +36,12 @@ const createProduct = async (product) => {
 };
 
 const updateProduct = async (product, productId) => {
-    const { categoryId, brand, measure, store, storeId, id_in_stor, codebar, name, nickname, content, price } = product;
-    const result = await executeQuery(queries.updateProduct, [productId, categoryId, brand, measure, store, storeId, id_in_stor, codebar, name, nickname, content, price ]);
+    const { category, measure, store, id, codebar, name, nickname, content, price, img, favorite } = product;
+    const result = await executeQuery(queries.updateProduct, [productId, category, measure, store, id, codebar, name, nickname, content, price, img, favorite ]);
     const updateProduct = {
         message: `Product with id ${productId} updated`,
         data: {
-            name,
-            nickname,
-            brand,
-            price,
-            store,
-            category: categoryId
+            product
         },
         result: result.rowCount
     };

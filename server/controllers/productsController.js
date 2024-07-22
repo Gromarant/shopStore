@@ -15,8 +15,8 @@ const getProducts = async (req, res) => {
 const createProduct = async (req, res) => responseHandler(Products.createProduct(req.body), req, res, 201);
 
 const updateProduct = async (req, res) => {
-  if(req.params.id) {
-  responseHandler(Products.updateProduct(req.body, req.params.id), req, res, 200);
+  if(req.params.id && req.body) {
+    responseHandler(Products.updateProduct(req.body, req.params.id), req, res, 200);
   }
   else {
     return;
