@@ -1,6 +1,6 @@
 const queries = require('../queries/startingQueries');
 const markerCategory = require('../data/initialSystem.json');
-const { executeQuery, concatQueryValuesToInsert, setTimeOutForCategoriesHttpCall } = require('../utils');
+const { executeQuery, concatQueryValuesToInsert, httpCallOfCategory } = require('../utils');
 const dataPath = markerCategory["dataToInsert"];
 
 const mercadonaCategories = () => dataPath["category"].categories.map(category => category.id);
@@ -41,7 +41,7 @@ const insertMeasures = async() => {
 }
 
 const insertProductsByCategoryData = async () => {
-    await setTimeOutForCategoriesHttpCall(categories, dataPath);
+    await httpCallOfCategory(categories[0], dataPath);
 };
 
 const insertLocations = async () => {
@@ -51,16 +51,15 @@ const insertLocations = async () => {
 
 const dbPopulation = async () => {
     console.time('dbPopulation: ');
-    await createDbTables();
-    await Promise.all([
-        insertZip(),
-        insertCategories(),
-    ]);
-    await insertStores();
-    await insertMeasures();
+    // await createDbTables();
+    // await Promise.all([
+        // insertZip(),
+        // insertCategories(),
+    // ]);
+    // await insertStores();
+    // await insertMeasures();
     await insertProductsByCategoryData();
-    await insertLocations();
+    // await insertLocations();
     console.timeEnd('dbPopulation: ');
 };
-
 dbPopulation();
