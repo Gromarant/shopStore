@@ -1,7 +1,7 @@
-import { Image, Logo, LabelAmount, Counter } from '../atomComponents';
+import { Image, Logo, LabelAmount, Counter, IconStar } from '../atomComponents';
 
 function RegularCard({
-    style, id, logo, img, name, brand, labelOne, labelTwo, setQuantity, count = 0,
+    style, id, logo, img, name, brand, labelOne, labelTwo, setQuantity, count = 0, favorite, setFavorite
 }) {
     return (
         <article className={`card ${style}`} id={`card${id}`}>
@@ -12,7 +12,9 @@ function RegularCard({
                 </div>
             </header>
             <section className='content'>
-                <Image img={img}/>
+                <Image img={img}>
+                    <IconStar favorite={favorite} toggle={setFavorite}/>
+                </Image>
                 <section className='card_text'>
                     <h1 className='font_12'>{name}</h1>
                     <p className='font_8'>{brand}</p>

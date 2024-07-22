@@ -9,6 +9,7 @@ import Image from "./Image";
 import LabelAmount from "./LabelAmount";
 import Logo from "./Logo";
 import NavLink from "./NavLink";
+import IconStar from "./IconStar";
 
 export {
     BillCard,
@@ -21,5 +22,6 @@ export {
     Image,
     LabelAmount,
     Logo,
-    NavLink
+    NavLink,
+    IconStar
 };
