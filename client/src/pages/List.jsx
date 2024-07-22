@@ -47,7 +47,7 @@ function List() {
         const price = [ ...shoppingData ];
 
         if (displayShoppingList) {
-            totalToPay = price?.map(product => (Number(product.price) * product.quantity)).reduce((amount, price) => amount + price);
+            totalToPay = price?.map(product => (Number(product.price) * product.quantity)).reduce((amount, price) => amount + price).toFixed(2);
         };
         return shoppingData
     };
@@ -83,7 +83,12 @@ function List() {
                 setFavorite={() => setFavorite(product.uid, product, !product.favorite)}
                 count={shoppingList[product.uid]?.quantity}
                 key={product.uid}/>)}
-            { totalToPay !== 0 ? <div>{totalToPay}</div> : null }
+            { totalToPay !== 0 
+                ? <article>
+                    <p>Total</p>
+                    {`${totalToPay} €`}
+                  </article> 
+                : null }
             <button className='cta createList' onClick={() => createListItems()}>Create List</button>
             <div className='icon_div menu' onClick={() => setDisplayShoppingList(!displayShoppingList)}>
                 <ToggleIcon className="icon"/>
