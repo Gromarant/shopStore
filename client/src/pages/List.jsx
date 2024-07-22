@@ -8,6 +8,7 @@ function List() {
     const [displayShoppingList, setDisplayShoppingList] = useState(false);
     const [catalog, setCatalog] = useState([]);
     const [shoppingList, setShoppingList] = useState({});
+    const [cleanShoppingList, setCleanShoppingList] = useState([]);
 
     const setIntoList = (product, quantity) => {
         setShoppingList(oldList => ({ ...oldList, [product.uid]: { ...product, quantity: Number(quantity) } }));
@@ -23,22 +24,28 @@ function List() {
         list.map( item => setIntoList(item, item.quantity));
     };
 
+    const setFavorite = async(id, product, favoriteProp) => {
+        await productsModel.updateProduct(id, { ...product, favorite: favoriteProp });
+        setProducts();
+        setList();
+    }
+
     useEffect(() => {
         setList();
         setProducts();
+        setCleanShoppingList(getCleanShoppingList(shoppingList));
     }, []);
-
+    
     const getCleanShoppingList = (objectList) => Object.values(objectList)?.filter(product => product.quantity !== 0);
 
     const createListItems = () => {
-        const cleanShoppingList = getCleanShoppingList(shoppingList)
+        setCleanShoppingList(getCleanShoppingList(shoppingList));
         shoppingListModel.postList(cleanShoppingList);
     };
 
-    const shoppingListElements = ['shopList', getCleanShoppingList(shoppingList), FaRegEyeSlash]
-    const catalogListElements = ['search', catalog, FaRegEye]
-
-    const [style, data, ToggleIcon] = displayShoppingList ? shoppingListElements : catalogListElements;
+    const shoppingListElements = () => ['shopList', getCleanShoppingList(shoppingList), FaRegEyeSlash];
+    const catalogListElements = ['search', catalog, FaRegEye];
+    const [style, data, ToggleIcon] = displayShoppingList ? shoppingListElements() : catalogListElements;
 
     return(
         <section className='search'>
@@ -63,6 +70,8 @@ function List() {
                     currency: '€',
                     unit: 'Kg'
                 }}
+                favorite={product.favorite}
+                setFavorite={() => setFavorite(product.uid, product, !product.favorite)}
                 count={shoppingList[product.uid]?.quantity}
                 key={product.uid}/>)}
             <button className='cta createList' onClick={() => createListItems()}>Create List</button>

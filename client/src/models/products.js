@@ -5,6 +5,11 @@ const getProducts = async() => {
     return response;
 };
 
+const updateProduct = async(id, product) => {
+    await axios.put(`/api/v1/products/${id}`, product);
+}
+
 export default {
-    getProducts
+    getProducts,
+    updateProduct
 };
