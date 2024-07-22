@@ -9,27 +9,26 @@ function List() {
     const [catalog, setCatalog] = useState([]);
     const [shoppingList, setShoppingList] = useState({});
     const [cleanShoppingList, setCleanShoppingList] = useState([]);
+    let totalToPay = 0;
 
-    const setIntoList = (product, quantity) => {
-        setShoppingList(oldList => ({ ...oldList, [product.uid]: { ...product, quantity: Number(quantity) } }));
-    };
-
+    const setIntoList = (product, quantity) =>  setShoppingList(oldList => ({ ...oldList, [product.uid]: { ...product, quantity: Number(quantity) } }));
+    
     const setProducts = async() => {
         const products = await productsModel.getProducts();
         setCatalog(products);
     };
-
+    
     const setList = async() => { 
         const list = await shoppingListModel.getListItems();
         list.map( item => setIntoList(item, item.quantity));
     };
-
+    
     const setFavorite = async(id, product, favoriteProp) => {
         await productsModel.updateProduct(id, { ...product, favorite: favoriteProp });
         setProducts();
         setList();
     }
-
+    
     useEffect(() => {
         setList();
         setProducts();
@@ -43,7 +42,17 @@ function List() {
         shoppingListModel.postList(cleanShoppingList);
     };
 
-    const shoppingListElements = () => ['shopList', getCleanShoppingList(shoppingList), FaRegEyeSlash];
+    const setShoppingListData = () => {
+        const shoppingData = getCleanShoppingList(shoppingList);
+        const price = [ ...shoppingData ];
+
+        if (displayShoppingList) {
+            totalToPay = price?.map(product => (Number(product.price) * product.quantity)).reduce((amount, price) => amount + price);
+        };
+        return shoppingData
+    };
+
+    const shoppingListElements = () => ['shopList', setShoppingListData(), FaRegEyeSlash];
     const catalogListElements = ['search', catalog, FaRegEye];
     const [style, data, ToggleIcon] = displayShoppingList ? shoppingListElements() : catalogListElements;
 
@@ -74,6 +83,7 @@ function List() {
                 setFavorite={() => setFavorite(product.uid, product, !product.favorite)}
                 count={shoppingList[product.uid]?.quantity}
                 key={product.uid}/>)}
+            { totalToPay !== 0 ? <div>{totalToPay}</div> : null }
             <button className='cta createList' onClick={() => createListItems()}>Create List</button>
             <div className='icon_div menu' onClick={() => setDisplayShoppingList(!displayShoppingList)}>
                 <ToggleIcon className="icon"/>
