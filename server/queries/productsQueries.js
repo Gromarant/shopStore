@@ -37,6 +37,10 @@ const queries =  {
             img=$11,
             favorite=$12
         WHERE id=$1;`,
+        updateProductsPrice: `
+        UPDATE product
+        SET price=$2
+        WHERE id_in_store=$1;`,
     deleteProduct: `
         DELETE FROM product
         WHERE id=$1;`

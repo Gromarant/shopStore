@@ -2,7 +2,7 @@ const Products = require('../models/productsModel');
 const { responseHandler } = require('../utils');
 
 
-const getProducts = async (req, res) => {
+const getProducts = async(req, res) => {
   if(req.params.id) {
     responseHandler(Products.getProductById(req.params.id), req, res, 200);
   } else if(req.params.pattern) {
@@ -12,18 +12,15 @@ const getProducts = async (req, res) => {
   };
 };
 
-const createProduct = async (req, res) => responseHandler(Products.createProduct(req.body), req, res, 201);
+const createProduct = async(req, res) => responseHandler(Products.createProduct(req.body), req, res, 201);
 
-const updateProduct = async (req, res) => {
-  if(req.params.id && req.body) {
+const updateProduct = async(req, res) => {
+  if(req.params?.id && req.body) {
     responseHandler(Products.updateProduct(req.body, req.params.id), req, res, 200);
   }
-  else {
-    return;
-  };
 };
 
-const deleteProduct = async (req, res) => {
+const deleteProduct = async(req, res) => {
   if(req.params.id) {
     responseHandler(Products.deleteProduct(req.params.id), req, res, 200);
   };

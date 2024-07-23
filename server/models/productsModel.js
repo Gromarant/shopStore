@@ -1,25 +1,23 @@
 const queries = require('../queries/productsQueries');
-const { executeQuery /*,httpRequest*/ } = require('../utils');
+const { executeQuery } = require('../utils');
 
-// const product_url = (product_id) => `https://tienda.mercadona.es/api/products/${product_id}/?lang=es&wh=mad1`;
 
-// const getProductById = async (id) => httpRequest(product_url(id));
-const getProductById = async (id) => {
+const getProductById = async(id) => {
     const result = await executeQuery(queries.getProductById, [id]);
     return result.rows[0];
 };
 
-const getProductByMatch = async (pattern) => {
+const getProductByMatch = async(pattern) => {
     const result = await executeQuery(queries.getMatchProducts, [pattern]);
     return result.rows;
 };
 
-const getProducts = async () => {
+const getProducts = async() => {
     const result = await executeQuery(queries.getProducts);
     return result.rows;
 };
 
-const createProduct = async (product) => {
+const createProduct = async(product) => {
     const { id, name, img, packaging, store, zip, measure, content, categoryId, price, brand, codebar, nickname  } = product;
     const result = await executeQuery(queries.createProduct, [ id, name, img, packaging, store, zip, measure, content, categoryId, price, brand, codebar, nickname]);
     const createdProduct = {
@@ -48,7 +46,15 @@ const updateProduct = async (product, productId) => {
     return updateProduct;
 };
 
-const deleteProduct = async (id) => {
+const updateProducts = async(products) => {
+    await Promise.all(products?.map( async(product) => {
+        const { id, price } = product;
+        await executeQuery(queries.updateProductsPrice, [ id, price ]);
+    }));
+    return `Products updated`;
+};
+
+const deleteProduct = async(id) => {
     const result = await executeQuery(queries.deleteProduct, [id]);
     const deletedProduct =  {
         message: `Product with id ${id} deleted`,
@@ -63,5 +69,6 @@ module.exports = {
     getProducts,
     createProduct,
     updateProduct,
+    updateProducts,
     deleteProduct
 };
