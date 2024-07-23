@@ -222,7 +222,8 @@
     bottom: 114px;
 }
 
-.menu {
+.menu,
+.reload {
     bottom: 111px;
     display: flex;
     flex-direction: column;
@@ -235,6 +236,10 @@
     display: flex;
     flex-direction: column;
     gap: 8px;
+}
+
+.reload {
+    bottom: 170px;
 }
 
 .cta {
