@@ -34,12 +34,12 @@ let categoryDataToInsert;
     return executeQuery(concatQueryValuesToInsert(dataPath.product.name, dataPath.product.params, values));
 };
 
-// const setTimeOutForCategoriesHttpCall = async (categories, dataPath) => {
-//     // for(index=0; index <= categories.length -1; index++) {
-//         console.log(categories[index]);
-//         setTimeout( httpCallOfCategory, getRandomTimeout(300000, 60000), categories[index], dataPath );
-//     // };
-// };
+const setTimeOutForCategoriesHttpCall = async (categories, dataPath) => {
+    for(index=1; index <= categories.length -1; index++) {
+        console.log(categories[index]);
+        setTimeout( httpCallOfCategory, getRandomTimeout(300000, 60000), categories[index], dataPath );
+    };
+};
 
 const unitForLowerContent = (unit) => unit === 'L' ? "ml" : "g";
 
@@ -51,6 +51,6 @@ module.exports = {
     concatQueryValuesToInsert,
     getCategoryData,
     httpCallOfCategory,
-    // setTimeOutForCategoriesHttpCall,
+    setTimeOutForCategoriesHttpCall,
     unitForLowerContent
 }

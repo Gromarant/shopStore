@@ -853,7 +853,7 @@
         },   
         "product":  {
             "name": "product",  
-            "params": [ "id", "category_uid", "store_uid", "measure_uid", "id_in_store", "name", "img", "content", "packaging", "price" ]
+            "params": [ "id", "category_uid", "store_uid", "measure_uid", "id_in_store", "name", "img", "content", "packaging", "price", "favorite" ]
         },
         "location": {
             "name": "location",
