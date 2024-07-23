@@ -7,9 +7,14 @@ const getProducts = async() => {
 
 const updateProduct = async(id, product) => {
     await axios.put(`/api/v1/products/${id}`, product);
-}
+};
+
+const updateProducts = async(products) => {
+    await axios.put(`/api/v1/products`, products);
+};
 
 export default {
     getProducts,
-    updateProduct
+    updateProduct,
+    updateProducts
 };

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
 import { FaRegEye, FaRegEyeSlash  } from "react-icons/fa";
+import { GrUpdate } from "react-icons/gr";
 import RegularCard from '../components/RegularCard';
 import { logoStore, pricePerKg } from '../utils/card';
-import { shoppingListModel, productsModel} from '../models';
+import { shoppingListModel, productsModel } from '../models';
 
 function List() {
     const [displayShoppingList, setDisplayShoppingList] = useState(false);
@@ -11,8 +12,9 @@ function List() {
     const [cleanShoppingList, setCleanShoppingList] = useState([]);
     let totalToPay = 0;
 
-    const setIntoList = (product, quantity) =>  setShoppingList(oldList => ({ ...oldList, [product.uid]: { ...product, quantity: Number(quantity) } }));
-    
+
+    const setIntoList = (product, quantity) => setShoppingList(oldList => ({ ...oldList, [product.uid]: { ...product, quantity: Number(quantity) } }));
+
     const setProducts = async() => {
         const products = await productsModel.getProducts();
         setCatalog(products);
@@ -27,7 +29,14 @@ function List() {
         await productsModel.updateProduct(id, { ...product, favorite: favoriteProp });
         setProducts();
         setList();
-    }
+    };
+
+    const updateShoppingListproducts = async(list) => {
+        const listItemsId = await list.map(item => item.id);
+        await shoppingListModel.updateListItems(listItemsId);
+        setList();
+        setProducts();
+    };
     
     useEffect(() => {
         setList();
@@ -83,16 +92,17 @@ function List() {
                 setFavorite={() => setFavorite(product.uid, product, !product.favorite)}
                 count={shoppingList[product.uid]?.quantity}
                 key={product.uid}/>)}
-            { totalToPay !== 0 
-                ? <article>
-                    <p>Total</p>
-                    {`${totalToPay} €`}
-                  </article> 
-                : null }
+            <article>
+                <p>Total</p>
+                {`${totalToPay} €`}
+            </article>
             <button className='cta createList' onClick={() => createListItems()}>Create List</button>
-            <div className='icon_div menu' onClick={() => setDisplayShoppingList(!displayShoppingList)}>
+            <div className={`${cleanShoppingList ? 'icon_div menu' : 'hidden'}`} onClick={() => setDisplayShoppingList(!displayShoppingList)}>
                 <ToggleIcon className="icon"/>
             </div>
+            { displayShoppingList ? <div className='icon_div reload' onClick={() => updateShoppingListproducts(getCleanShoppingList(shoppingList))}>
+                <GrUpdate className="icon"/>
+            </div> : null}
         </section>
     )
 };
