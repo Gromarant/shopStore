@@ -1,14 +1,32 @@
 const queries = require('../queries/listItemsQueries');
-const { executeQuery } = require('../utils');
+const { updateProducts } = require('../models/productsModel');
+const { executeQuery, httpRequest } = require('../utils');
 
-const getListItems = async () => {
+
+const getProductsByShop = async(products) => {
+    const updatedProducts = await Promise.all(
+        products?.map( 
+            async(product) => 
+                await httpRequest(`https://tienda.mercadona.es/api/products/${product}/?lang=es&wh=mad1`)
+        )
+    );
+    const productsFormated = updatedProducts?.map(product => 
+        ({
+            id: product.id,
+            price: product["price_instructions"].unit_price
+        })
+    )
+    updateProducts(productsFormated);
+};
+
+const getListItems = async() => {
     const result = await executeQuery(queries.getListItems);
     return result.rows;
 };
 
 const createListItem = (products) => {
     let createdListItem;
-    products?.map(async(product) => {
+    products?.map( async(product) => {
         const result = await executeQuery(queries.createListItem, [ product.uid, product.quantity ]);
             createdListItem = {
             message: 'ListItem created',
@@ -21,7 +39,7 @@ const createListItem = (products) => {
     return createdListItem;
 };
 
-const updateListItem = async (listItem, listItemId) => {
+const updateListItem = async(listItem, listItemId) => {
     const { productId, quantity } = listItem;
     const result = await executeQuery(queries.updateListItem, [listItemId, productId, quantity ]);
     const updatedListItem = {
@@ -35,9 +53,10 @@ const updateListItem = async (listItem, listItemId) => {
     return updatedListItem;
 };
 
-const deleteListItem = async () => await executeQuery(queries.deleteListItem);
+const deleteListItem = async() => await executeQuery(queries.deleteListItem);
 
 module.exports = {
+    getProductsByShop,
     getListItems,
     createListItem,
     updateListItem,
