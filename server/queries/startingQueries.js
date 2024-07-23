@@ -37,7 +37,7 @@ const queries = {
             brand_uid UUID,
             store_uid UUID,
             measure_uid UUID,
-            id_in_store NUMERIC,
+            id_in_store NUMERIC UNIQUE,
             codebar VARCHAR(50),
             name VARCHAR(320),
             nickname VARCHAR(255),
